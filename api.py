@@ -8,7 +8,7 @@ class PetFriends:
     """апи библиотека к веб приложению Pet Friends"""
 
     def __init__(self):
-        self.base_url = "https://petfriends1.herokuapp.com/"
+        self.base_url = "https://petfriends.skillfactory.ru/"
 
     def get_api_key(self, email: str, passwd: str) -> json:
         """Метод делает запрос к API сервера и возвращает статус запроса и результат в формате
