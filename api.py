@@ -119,7 +119,7 @@ def create_pet_simple(self, auth_key: json, name: str, animal_type: str, age: st
         result = ""
         try:
             result = res.json()
-        except json.JSONDecodeError:
+        except json.decoder.JSONDecodeError:
             result = res.text
         return status, result
 
@@ -136,7 +136,7 @@ def add_photo_pet(self, auth_key: json, pet_id: str, name: str, pet_photo: str) 
         result = ""
         try:
             result = res.json()
-        except json.JSONDecodeError:
+        except json.decoder.JSONDecodeError:
             result = res.text
         return status, result
         
