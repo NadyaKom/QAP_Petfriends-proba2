@@ -105,3 +105,39 @@ class PetFriends:
         except json.decoder.JSONDecodeError:
             result = res.text
         return status, result
+
+def create_pet_simple(self, auth_key: json, name: str, animal_type: str, age: str) -> json:
+        """Метод позволяет добавить информацию о новом питомце"""
+        data = {
+            'name': name,
+            'age': age,
+            'animal_type': animal_type
+        }
+        headers = {'auth_key': auth_key['key']}
+        res = requests.post(self.base_url + 'api/pets/, headers=headers, data=data)
+        status = res.status_code
+        result = ""
+        try:
+            result = res.json()
+        except json.JSONDecodeError:
+            result = res.text
+        return status, result
+
+def add_photo_pet(self, auth_key: json, pet_id: str, name: str, pet_photo: str) -> json:
+        """Метод позволяет добавить фото питомца"""
+        data = {
+            'name': name,
+            'pet_id': pet_id,
+            'pet_photo': pet_photo
+        }
+        headers = {'auth_key': auth_key['key']}
+        res = requests.post(self.base_url + 'api/pets/, headers=headers, data=data)
+        status = res.status_code
+        result = ""
+        try:
+            result = res.json()
+        except json.JSONDecodeError:
+            result = res.text
+        return status, result
+        
+
