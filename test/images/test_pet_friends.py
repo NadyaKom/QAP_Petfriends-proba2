@@ -26,6 +26,20 @@ def test_get_all_pets_with_valid_key(filter=''):
     status, result = pf.get_list_of_pets(auth_key, filter)
 
     assert status == 200
+
+
+def test_delete_pet_by_id(pet_id='f70212c3-4ced-4fa7-b4a5-17041a6f8454')
+   """ Проверяем удаление питомца по id""" 
+   
+    pet_id = 'f3043661-b5a7-41b2-be7c-39e1e3141290'
+    status, _ = pf.delete_pet(auth_key, pet_id)
+
+    #запрашиваем список своих питомцев
+    _, my_pets = pf.get_list_my_pets(auth_key, "my_pets")
+
+    # Проверяем что статус ответа равен 200 и в списке питомцев нет id удалённого питомца
+    assert status == 200
+    assert pet_id not in my_pets.values()
     assert len(result['pets']) > 0
 
 
@@ -187,4 +201,17 @@ def test_delete_pet_by_id(pet_id='f70212c3-4ced-4fa7-b4a5-17041a6f8454')
 
     # Проверяем что статус ответа равен 200 и в списке питомцев нет id удалённого питомца
     assert status == 200
+    assert pet_id not in my_pets.values()
+
+def test_delete_pet_by_invalid_id(pet_id='f70212c3-4ced-4fa7-b4a5-17041a6f')
+   """ Проверяем удаление питомца по  неверному id""" 
+   
+    pet_id = 'ff70212c3-4ced-4fa7-b4a5-17041a6f'
+    status, _ = pf.delete_pet(auth_key, pet_id)
+
+    #запрашиваем список своих питомцев
+    _, my_pets = pf.get_list_my_pets(auth_key, "my_pets")
+
+    # Проверяем что статус ответа равен 400 и в списке питомцев нет такого  id  питомца
+    assert status == 400
     assert pet_id not in my_pets.values()
