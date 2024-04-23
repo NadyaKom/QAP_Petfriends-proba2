@@ -90,23 +90,56 @@ def test_successful_update_self_pet_info(name='Мурзик', animal_type='Ко�
         raise Exception("There is no my pets")
 
 
-def test_get_api_key_for_invalid_user(email=invalid_email, password=invalid_password):
+def test_get_api_key_for_invalid_email_invalid_password(email=invalid_email, password=invalid_password):
      """Проверяем возможность входа при неверном логине и пароле """
     
-        assert status ==4xx
+        assert status == 400
 
-def test_get_api_key_for_invalid_user(email=invalid_email, password=valid_password):
+def test_get_api_key_for_invalid_email_valid_password(email=invalid_email, password=valid_password):
      """Проверяем возможность входа при неверном логине и верном пароле """
 
-       assert status ==4xx
+       assert status == 400
 
-def test_get_api_key_for_invalid_user(email=invalid_email, password=valid_password):
-     """Проверяем возможность входа при неверном логине и верном пароле """
+def test_get_api_key_for_invalid_email_valid_password(email=valid_email, password=invalid_password):
+     """Проверяем возможность входа при верном логине и неверном пароле """
 
-       assert status ==4xx
+       assert status == 400
 
 def test_get_api_key_for_invalid_user(email=valid_email, password=invalid_password):
      """Проверяем возможность входа при верном логине и неверном пароле """
 
-       assert status ==4xx
+       assert status == 400
+def test_add_new_pet_with_invalid_data(name='Барбоскин', animal_type='двортерьер',
+                                     age='65948776554', pet_photo='images/cat1.jpg'):
+    """Проверяем что можно добавить питомца с  некорректными данными слишком большим числом в возрасте"""
+
+    # Получаем полный путь изображения питомца и сохраняем в переменную pet_photo
+    pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
+
+    # Запрашиваем ключ api и сохраняем в переменую auth_key
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+
+    # Добавляем питомца
+    status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
+
+    # Сверяем полученный ответ с ожидаемым результатом
+    assert status == 400
+    assert result['name'] == name
+
+def test_add_new_pet_with_invalid_data(name='Барбоскин', animal_type='двортерьер',
+                                     age='65948776554', pet_photo='images/cat1.jpg'):
+    """Проверяем что можно добавить питомца с  некорректными данными слишком большим числом в возрасте"""
+
+    # Получаем полный путь изображения питомца и сохраняем в переменную pet_photo
+    pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
+
+    # Запрашиваем ключ api и сохраняем в переменую auth_key
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+
+    # Добавляем питомца
+    status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
+
+    # Сверяем полученный ответ с ожидаемым результатом
+    assert status == 400
+    assert result['name'] == name
 
