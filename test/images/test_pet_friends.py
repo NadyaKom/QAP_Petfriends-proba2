@@ -88,3 +88,25 @@ def test_successful_update_self_pet_info(name='Мурзик', animal_type='Ко�
     else:
         # если спиок питомцев пустой, то выкидываем исключение с текстом об отсутствии своих питомцев
         raise Exception("There is no my pets")
+
+
+def test_get_api_key_for_invalid_user(email=invalid_email, password=invalid_password):
+     """Проверяем возможность входа при неверном логине и пароле """
+    
+        assert status ==4xx
+
+def test_get_api_key_for_invalid_user(email=invalid_email, password=valid_password):
+     """Проверяем возможность входа при неверном логине и верном пароле """
+
+       assert status ==4xx
+
+def test_get_api_key_for_invalid_user(email=invalid_email, password=valid_password):
+     """Проверяем возможность входа при неверном логине и верном пароле """
+
+       assert status ==4xx
+
+def test_get_api_key_for_invalid_user(email=valid_email, password=invalid_password):
+     """Проверяем возможность входа при верном логине и неверном пароле """
+
+       assert status ==4xx
+
