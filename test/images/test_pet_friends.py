@@ -175,3 +175,16 @@ def test_get_my_pets_with_valid_key(my_pets):
 
     assert status == 200
     assert len(result['pets']) == my_pets
+
+def test_delete_pet_by_id(pet_id='f70212c3-4ced-4fa7-b4a5-17041a6f8454')
+   """ Проверяем удаление питомца по id""" 
+   
+    pet_id = 'f3043661-b5a7-41b2-be7c-39e1e3141290'
+    status, _ = pf.delete_pet(auth_key, pet_id)
+
+    #запрашиваем список своих питомцев
+    _, my_pets = pf.get_list_my_pets(auth_key, "my_pets")
+
+    # Проверяем что статус ответа равен 200 и в списке питомцев нет id удалённого питомца
+    assert status == 200
+    assert pet_id not in my_pets.values()
