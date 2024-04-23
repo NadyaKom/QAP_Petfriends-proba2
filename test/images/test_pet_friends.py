@@ -166,3 +166,12 @@ def test_add_new_pet_with_incomplete_data(name='Персик', animal_type=' ',
     # Сверяем полученный ответ с ожидаемым результатом
     assert status == 200
     assert result['name'] == name
+
+def test_get_all_pets_with_valid_key(filter='my_pets'):
+    """ Проверяем что запрос моих питомцев возвращает только список моих питомцев"""
+
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+    status, result = pf.get_list_of_pets(auth_key, filter)
+
+    assert status == 200
+    assert len(result['pets']) == my_pets
